@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookstore</title>
+    <link rel="stylesheet" href="Style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital@1&display=swap" rel="stylesheet">
+
+</head>
+<body> 
+    <div class="home">
+    <h1>BooksKey</h1>
+    </div>
+
+    <div class="container">
+        <div class="item">
+        <h2>Rich Man Poor Man</h2>
+        <h3>Ricard</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem aliquid, tempore quis, quas blanditiis magni eveniet ad consectetur laborum sint illo quod</p>
+        <button id="DeleteItem" onclick="deleteitem(event)">Delete</button>
+        </div>
+    </div>
+        <div class="overlay"> </div>
+        <div class="popup-box">
+            <h2>Add Book</h2>
+            <form>
+                <input type="text" placeholder="Book title" id="book-title-input">
+                <input type="text" placeholder="Book author" id="book-author-input">
+                <textarea name="text" placeholder="Short Discription" id="book-discription-input"></textarea>
+                <button id="add-btn">Add</button> <button id="cancle-btn">Cancle</button>
+            </form>
+
+        </div>
+
+        <button class="popup-btn" id="add-popup-btn" onclick="show()">+</button>
+   
+    
+</body>
+
+<script>
+    var addpopupbtn = document.getElementById("add-popup-btn");
+    var popupoverlay = document.querySelector(".overlay");
+    var popupbox = document.querySelector(".popup-box");
+    var add_btn = document.getElementById("add-btn");
+    var canclebtn = document.getElementById("cancle-btn");
+    var booktitle = document.getElementById("book-title-input");
+    var bookauthor = document.getElementById("book-author-input");
+    var bookdiscription = document.getElementById("book-discription-input");
+    var container = document.querySelector(".container");
+    var Delete = document.getElementById("DeleteItem")
+
+    function show(){
+        popupoverlay.style.display="block"
+        popupbox.style.display="block"
+    }
+
+    canclebtn.addEventListener("click", function(event){
+        event.preventDefault();
+        popupoverlay.style.display="none"
+        popupbox.style.display="none"
+
+    })
+
+    add_btn.addEventListener("click", function(event){
+        event.preventDefault()
+        var div = document.createElement("div");
+        div.setAttribute("class", "item")
+        div.innerHTML = `<h2>${booktitle.value}</h2>
+        <h3>${bookauthor.value}</h3>
+        <p>${bookdiscription.value}</p>
+        <button onclick="deleteitem(event)" >Delete</button>`;
+        container.append(div)
+        popupoverlay.style.display="none"
+        popupbox.style.display="none"
+    })
+
+    function deleteitem(event){
+        event.target.parentElement.remove();
+    }
+
+
+
+
+
+</script>
+</html>
